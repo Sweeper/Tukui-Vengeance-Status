@@ -13,7 +13,7 @@ local classcolor = RAID_CLASS_COLORS[class];
 local locked = false
 
 local f = CreateFrame("Frame")
-f.ScanTip = CreateFrame("GameTooltip","VengeanceStatusScanTip",nil,"GameTooltipTemplate")
+f.ScanTip = CreateFrame("GameTooltip","TukuiVengeanceStatusScanTip",nil,"GameTooltipTemplate")
 f.ScanTip:SetOwner(UIParent, "ANCHOR_NONE")
 
 f.statusBar = {}
@@ -105,8 +105,8 @@ end
 local function SlashHandler(command)
 	if command == "" then
 		DEFAULT_CHAT_FRAME:AddMessage(f.label..(locked and "locked" or "unlocked"))
-		DEFAULT_CHAT_FRAME:AddMessage("/vgs lock")
-		DEFAULT_CHAT_FRAME:AddMessage("/vgs unlock")
+		DEFAULT_CHAT_FRAME:AddMessage("/tvgs lock")
+		DEFAULT_CHAT_FRAME:AddMessage("/tvgs unlock")
 	elseif command == "unlock" then
 		if f.statusBar.locked then
 			f.statusBar:EnableMouse(true)
@@ -183,9 +183,8 @@ function f.UNIT_AURA(...)
 	end
 end
 
-SlashCmdList["VENGEANCESTATUS"] = SlashHandler
-SLASH_VENGEANCESTATUS1 = "/vgs"
-SLASH_VENGEANCESTATUS2 = "/vengeancestatus"
+SlashCmdList["TUKUIVENGEANCESTATUS"] = SlashHandler
+SLASH_TUKUIVENGEANCESTATUS1 = "/tvgs"
 
 f:RegisterEvent("PLAYER_LOGIN")
 f:RegisterEvent("ACTIVE_TALENT_GROUP_CHANGED")
@@ -199,14 +198,14 @@ function(self, event, ...)
 	end
 end)
 
-f.statusBar = CreateFrame("Frame", "VengeanceStatus_StatusBarFrame", UIParent)
+f.statusBar = CreateFrame("Frame", "TukuiVengeanceStatusBar", UIParent)
 f.statusBar:SetWidth(width)
 f.statusBar:SetHeight(height)
 f.statusBar:SetPoint("CENTER")
 f.statusBar:SetClampedToScreen(true)
 TukuiDB.SetTemplate(f.statusBar)
 
-f.statusBar.bar = CreateFrame("StatusBar", "VengeanceStatus_StatusBar", UIParent) --f.statusBar)
+f.statusBar.bar = CreateFrame("StatusBar", nil, UIParent)
 f.statusBar.bar:SetWidth(width-4)
 f.statusBar.bar:SetHeight(height-4)
 f.statusBar.bar:SetPoint("CENTER",f.statusBar,"CENTER",0,0)

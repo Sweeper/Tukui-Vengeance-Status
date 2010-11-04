@@ -5,6 +5,5 @@
 ## Editor: Sweeper
 ## Version: 1
 ## RequiredDeps: Tukui
-## SavedVariables: TukuiVengeanceStatusDB
 
 core.lua
